@@ -97,6 +97,14 @@ main {
     color: #333;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.repo-link.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .repo-link:hover {
