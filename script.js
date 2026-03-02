@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function updateFooterYear() {
     const footer = document.querySelector('footer p');
     const currentYear = new Date().getFullYear();
-    if (footer && footer.textContent.includes('2026')) {
+    if (footer) {
         footer.textContent = `© ${currentYear} My Portfolio. All rights reserved.`;
     }
 }
