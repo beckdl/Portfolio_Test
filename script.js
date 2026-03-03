@@ -75,17 +75,37 @@ async function loadDocuments() {
         }
 
         // Try to get the repository default branch from GitHub API
-        try {
-            const repoApi = `https://api.github.com/repos/${owner}/${repo}`;
-            const rResp = await fetch(repoApi);
-            if (rResp.ok) {
-                const repoInfo = await rResp.json();
-                if (repoInfo && repoInfo.default_branch) {
-                    branch = repoInfo.default_branch;
+            try {
+                const repoApi = `https://api.github.com/repos/${owner}/${repo}`;
+                const rResp = await fetch(repoApi);
+                if (rResp.ok) {
+                    const repoInfo = await rResp.json();
+                    if (repoInfo && repoInfo.default_branch) {
+                        branch = repoInfo.default_branch;
+                    }
                 }
+            } catch (e) {
+                // ignore and leave branch as default
+            }
+
+        // Debug: expose detected values in console and on page for quick diagnosis
+        console.info('Docs loader detection:', { owner, repo, branch });
+        try {
+            const docsList = document.getElementById('docsList');
+            if (docsList) {
+                let debugEl = document.getElementById('docs-debug');
+                if (!debugEl) {
+                    debugEl = document.createElement('div');
+                    debugEl.id = 'docs-debug';
+                    debugEl.style.fontSize = '0.9rem';
+                    debugEl.style.color = '#666';
+                    debugEl.style.marginBottom = '0.5rem';
+                    docsList.parentNode.insertBefore(debugEl, docsList);
+                }
+                debugEl.textContent = `Detected: ${owner}/${repo} @ ${branch}`;
             }
         } catch (e) {
-            // ignore and leave branch as default
+            // ignore DOM debug errors
         }
     } catch (e) {
         // fallback to configured values above
