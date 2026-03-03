@@ -136,6 +136,91 @@ footer p {
     font-size: 0.9rem;
 }
 
+.documents {
+    margin-bottom: 3rem;
+}
+
+.documents h2 {
+    color: #4A90E2;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.docs-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.doc-item {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    overflow: hidden;
+}
+
+.doc-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.doc-link {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.doc-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    background-color: #f8f9fa;
+}
+
+.doc-icon {
+    font-size: 2rem;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.doc-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.doc-info h3 {
+    color: #4A90E2;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    word-break: break-word;
+}
+
+.doc-meta {
+    color: #888;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.loading,
+.error,
+.no-docs {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    font-style: italic;
+}
+
+.error {
+    color: #d32f2f;
+}
+
 @media (max-width: 768px) {
     nav h1 {
         font-size: 1.5rem;
@@ -146,11 +231,16 @@ footer p {
     }
 
     .about h2,
-    .projects h2 {
+    .projects h2,
+    .documents h2 {
         font-size: 1.5rem;
     }
 
     .repository-links {
+        grid-template-columns: 1fr;
+    }
+
+    .docs-list {
         grid-template-columns: 1fr;
     }
 }
